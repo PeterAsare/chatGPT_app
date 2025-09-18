@@ -1,0 +1,347 @@
+/* --- General Modal Styling (Light Theme) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black; 
+  color: yellow;/* Dark overlay for contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background:yellow; /* White background */
+  color: #333; /* Dark text color */
+  padding: 1.5rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  animation: slide-down 0.3s ease-out;
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid black; /* Light border */
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #111;
+  font-size: 1.5rem;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color:black;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close-button:hover {
+  color: yellow;
+}
+
+/* --- Plan Selection Styling --- */
+.plan-options {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.plan-card {
+  flex: 1;
+  border: 2px solid black; /* Lighter border */
+  border-radius: 8px;
+  padding: 0.8rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+.plan-card:hover {
+  border-color: black;
+}
+
+.plan-card.selected {
+  border-color: yellow;
+  color: yellow;
+  background-color: black;
+  transform: scale(1.03);
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+.price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: yellow;
+  margin: 0.4rem 0;
+}
+
+.per-month-price {
+  font-size: 0.8rem;
+  color: yellow;
+}
+
+.best-value-badge {
+  background-color: black;
+  color: yellow;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* --- Payment Method Icons --- */
+.payment-methods h4 {
+  text-align: center;
+  color:black;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.payment-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 2.5rem;
+}
+
+.payment-icons i, .payment-icons .mobile-money-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  opacity: 0.85;
+}
+
+.payment-icons i:hover, .payment-icons .mobile-money-icon:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+/* Official Brand Colors */
+.fa-cc-visa { color: #1A1F71; }
+.fa-cc-mastercard { color: #EB001B; }
+.fa-cc-paypal { color: #00457C; }
+
+.mobile-money-icon {
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: #333;
+}
+
+/* --- Improved Form Styling (Light Theme) --- */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: yellow;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.form-group input, .form-group select {
+  width: 100%;
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.form-row {
+  display: flex;
+  gap: 0.8rem;
+}
+.form-row .form-group {
+  flex: 1;
+}
+
+.disclaimer {
+  font-size: 0.75rem;
+  text-align: center;
+  color:yellow;
+  background-color: black;
+  padding: 0.6rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border: 1px solid #ffeeba;
+}
+
+/* --- Button Styling (Light Theme) --- */
+.modal-footer {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.back-button {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  padding: 10px 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-grow: 1;
+  transition: background-color 0.2s ease;
+}
+.back-button:hover {
+  background: rgb(33, 33, 33);
+  color: yellow;
+}
+
+.pay-button {
+  background: black;
+  color:yellow;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  flex-grow: 2;
+  transition: background-color 0.2s ease;
+}
+
+.pay-button:hover {
+  background-color: rgb(41, 40, 40);
+  color: yellow;
+ 
+}
+
+.pay-button.paypal {
+  background-color: #000000;
+   border-radius: 8px solid  black;
+}
+.pay-button.paypal:hover {
+  background-color: #1e1f1f;
+  color: yellow;
+}
+
+/* --- Phone Number Input Group Styling --- */
+.phone-input-group {
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.phone-input-group:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+.country-code-select {
+  padding: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-right: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.country-code-select:focus {
+  outline: none;
+}
+
+.phone-input-group input[type="tel"] {
+  border: none;
+  flex-grow: 1;
+  border-radius: 0 5px 5px 0;
+}
+
+.phone-input-group input[type="tel"]:focus {
+  box-shadow: none; /* Remove the focus shadow from the text input */
+}
+
+/* --- Responsive Design for Mobile Devices --- */
+@media (max-width: 600px) {
+  .modal-content {
+    padding: 1.5rem;
+    width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .plan-options {
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
+  .plan-card.selected {
+    transform: scale(1.02);
+  }
+
+  .payment-icons {
+    font-size: 2.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .mobile-money-icon {
+    padding: 8px 12px;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    gap: 0.8rem;
+  }
+
+  .pay-button, .back-button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
