@@ -216,36 +216,38 @@ LIGHT MODE STYLES
 */
 
 .light-mode {
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: #ffffff; /* Changed to pure white */
+    color: #000000; /* Changed to pure black */
 }
 
 .light-mode .sidebar {
-    background-color: #ffffff;
+    background-color: #f0f0f0; /* Light grey for sidebar */
     border-right: 1px solid #e0e0e0;
+    color: #000000; /* Black text in sidebar */
 }
 
 .light-mode .brand {
-    color: #333;
+    color: #000000; /* Black brand text */
 }
 
 .light-mode .mid_btn {
-    background: #333;
-    color: #fff;
-    border-color: #333;
+    background: #e0e0e0; /* Light grey button */
+    color: #000000; /* Black text */
+    border-color: #cccccc;
 }
 
 .light-mode .mid_btn:hover {
-    background: #555;
+    background: #d4d4d4; /* Slightly darker grey on hover */
 }
 
 .light-mode .query {
+    background-color: #f0f0f0; /* Match sidebar background */
     border: 1px solid #e0e0e0;
-    color: #555;
+    color: #000000; /* Black text */
 }
 
 .light-mode .query:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
 }
 
 .light-mode .lowerSideBar {
@@ -253,43 +255,46 @@ LIGHT MODE STYLES
 }
 
 .light-mode .listItems {
-    color: #555;
+    background-color: #f0f0f0; /* Match sidebar background */
+    color: #000000; /* Black text */
 }
 
 .light-mode .listItems:hover {
-    background-color: #f0f0f0;
+    background-color: #e0e0e0;
 }
 
 .light-mode .listItems i {
-    color: #555;
+    color: #000000; /* Black icons */
 }
 
 .light-mode .main {
-    background-color: #f9f9f9;
+    background-color: #ffffff; /* White main area */
+    color: #000000; /* Black text */
 }
 
 .light-mode .chatMessage {
-    background-color: #ffffff;
+    background-color: #f0f0f0; /* Light grey for chat messages */
     border: 1px solid #e0e0e0;
+    color: #000000; /* Black text */
 }
 
 .light-mode .message {
-    color: #333;
+    color: #000000; /* Black text */
 }
 
 .light-mode .chatInput {
-    background-color: #ffffff;
-    border: 1px solid #ccc;
+    background-color: #e0e0e0; /* Grey input area */
+    border: 1px solid #cccccc;
 }
 
 .light-mode .chatInput input {
-    color: #333;
+    color: #000000; /* Black text */
 }
 
 .light-mode .chatInput button i {
-    color: #555;
+    color: #000000; /* Black icon */
 }
 
 .light-mode .chatInput button:hover i {
-    color: #333;
+    color: #333333; /* Darker grey on hover */
 }

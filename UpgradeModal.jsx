@@ -7,7 +7,6 @@ const plans = [
   { id: '12m', months: 12, price: 89.99, name: '1 Year' },
 ];
 
-// --- NEW: Data for country codes with flags ---
 const countryCodes = [
   { name: 'Ghana', code: '+233', flag: '🇬🇭' },
   { name: 'Nigeria', code: '+234', flag: '🇳🇬' },
@@ -20,58 +19,15 @@ const countryCodes = [
 
 // --- Mock Payment Forms (for UI demonstration only) ---
 
-// Mock Card Payment Form
-const CardPaymentForm = ({ plan, onBack, onPay }) => (
-  <div>
-    <h4>Pay ${plan.price} with Card</h4>
-    <p className="disclaimer">This is a UI demo. Do not enter real card details.</p>
-    <div className="form-group">
-      <label>Card Number</label>
-      <input type="text" placeholder="**** **** **** 1234" />
-    </div>
-    <div className="form-row">
-      <div className="form-group">
-        <label>Expiry Date</label>
-        <input type="text" placeholder="MM / YY" />
-      </div>
-      <div className="form-group">
-        <label>CVC</label>
-        <input type="text" placeholder="123" />
-      </div>
-    </div>
-    <div className="modal-footer">
-      <button className="back-button" onClick={onBack}>Back</button>
-      <button className="pay-button" onClick={onPay}>Pay Now</button>
-    </div>
-  </div>
-);
-
-// Mock PayPal Form
-const PayPalForm = ({ plan, onBack, onPay }) => (
-  <div className="paypal-form">
-    <h4>Pay ${plan.price} with PayPal</h4>
-    <p>You will be redirected to PayPal to complete your payment securely.</p>
-    <div className="modal-footer">
-      <button className="back-button" onClick={onBack}>Back</button>
-      <button className="pay-button paypal" onClick={onPay}>
-        <i className="fab fa-paypal"></i> Proceed to PayPal
-      </button>
-    </div>
-  </div>
-);
-
-// Mock Mobile Money Form
 const MobileMoneyForm = ({ plan, onBack, onPay }) => {
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
   const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleFinalPay = () => {
-    // In a real app, you would validate the full number here
     if (!phoneNumber) {
       alert("Please enter a phone number.");
       return;
     }
-    // This is where you would trigger the payment process
     alert(`Simulating payment for ${selectedCountry.code}${phoneNumber}`);
     onPay();
   };
@@ -120,10 +76,55 @@ const MobileMoneyForm = ({ plan, onBack, onPay }) => {
   );
 };
 
+// --- ADDED: Mock Card Payment Form ---
+const CardPaymentForm = ({ plan, onBack, onPay }) => {
+  return (
+    <div>
+      <h4>Pay ${plan.price} with Card</h4>
+      <p className="disclaimer">This is a UI demo. Do not enter real card details.</p>
+      <div className="form-group">
+        <label>Card Number</label>
+        <input type="text" placeholder="**** **** **** 1234" />
+      </div>
+      <div className="form-row">
+        <div className="form-group">
+          <label>Expiry Date</label>
+          <input type="text" placeholder="MM / YY" />
+        </div>
+        <div className="form-group">
+          <label>CVC</label>
+          <input type="text" placeholder="123" />
+        </div>
+      </div>
+      <div className="modal-footer">
+        <button className="back-button" onClick={onBack}>Back</button>
+        <button className="pay-button" onClick={onPay}>Pay ${plan.price}</button>
+      </div>
+    </div>
+  );
+};
+
+// --- ADDED: Mock PayPal Form ---
+const PayPalForm = ({ plan, onBack, onPay }) => {
+  return (
+    <div>
+      <h4>Pay ${plan.price} with PayPal</h4>
+      <p>You will be redirected to PayPal to complete your purchase securely.</p>
+      <div className="modal-footer">
+        <button className="back-button" onClick={onBack}>Back</button>
+        <button className="paypal-button" onClick={onPay}>
+          Proceed to PayPal
+        </button>
+      </div>
+    </div>
+  );
+};
+
 
 function UpgradeModal({ onClose }) {
   const [selectedPlanId, setSelectedPlanId] = useState(plans[1].id);
-  const [step, setStep] = useState('selectPlan'); // 'selectPlan', 'card', 'paypal', 'mobileMoney'
+  // --- UPDATED: Added 'card' and 'paypal' steps ---
+  const [step, setStep] = useState('selectPlan'); // 'selectPlan', 'mobileMoney', 'card', 'paypal'
 
   const selectedPlan = plans.find(p => p.id === selectedPlanId);
 
@@ -134,12 +135,13 @@ function UpgradeModal({ onClose }) {
 
   const renderStep = () => {
     switch (step) {
+      case 'mobileMoney':
+        return <MobileMoneyForm plan={selectedPlan} onBack={() => setStep('selectPlan')} onPay={handleFinalPay} />;
+      // --- ADDED: Cases for 'card' and 'paypal' ---
       case 'card':
         return <CardPaymentForm plan={selectedPlan} onBack={() => setStep('selectPlan')} onPay={handleFinalPay} />;
       case 'paypal':
         return <PayPalForm plan={selectedPlan} onBack={() => setStep('selectPlan')} onPay={handleFinalPay} />;
-      case 'mobileMoney':
-        return <MobileMoneyForm plan={selectedPlan} onBack={() => setStep('selectPlan')} onPay={handleFinalPay} />;
       default: // 'selectPlan'
         return (
           <>
@@ -158,16 +160,20 @@ function UpgradeModal({ onClose }) {
                 </div>
               ))}
             </div>
+            {/* --- UPDATED: Added buttons for all payment methods --- */}
             <div className="payment-methods">
-              <h4>Pay With</h4>
-              <div className="payment-icons">
-                <i className="fab fa-cc-visa" onClick={() => setStep('card')}></i>
-                <i className="fab fa-cc-mastercard" onClick={() => setStep('card')}></i>
-                <i className="fab fa-cc-paypal" onClick={() => setStep('paypal')}></i>
-                <span className="mobile-money-icon" onClick={() => setStep('mobileMoney')}>
-                  <i className="fas fa-mobile-alt"></i> Mobile Money
-                </span>
-              </div>
+              <p className="payment-title">Select Payment Method</p>
+              <button className="payment-button mobile-money" onClick={() => setStep('mobileMoney')}>
+                Mobile Money
+              </button>
+              <button className="payment-button card" onClick={() => setStep('card')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                Pay with Card
+              </button>
+              <button className="payment-button paypal" onClick={() => setStep('paypal')}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8.32 21.499a.999.999 0 0 1-.63-1.784l3.96-3.168c.356-.285.77-.447 1.209-.447h2.299c3.564 0 6.45-2.886 6.45-6.45s-2.886-6.45-6.45-6.45H9.15c-.624 0-1.16.43-1.29.993l-2.78 11.6c-.11.46.14.93.6.93h4.19c.52 0 .97-.35 1.12-.84l.53-1.71h.01c.38.63 1.05.95 1.8.95 1.31 0 2.4-1.09 2.4-2.4s-1.09-2.4-2.4-2.4c-.75 0-1.42.32-1.8.95l-.53 1.71c-.15.49-.6.84-1.12.84H8.95c-.25 0-.48-.17-.56-.41l-1.17-4.89c-.04-.15.06-.3.21-.3h9.02c2.4 0 4.35 1.95 4.35 4.35s-1.95 4.35-4.35 4.35h-2.3c-.94 0-1.82.35-2.52.96l-3.96 3.168c-.19.15-.43.23-.67.23z"></path></svg>
+                Pay with PayPal
+              </button>
             </div>
           </>
         );
